@@ -1,6 +1,6 @@
 ## To run this code 
 ``` bash
-git clone <github link>
+git clone https://github.com/yogijagdish/MoneyCalculator.git
 ```
 
 ## install virtual environment and activate it
@@ -31,9 +31,10 @@ create database MoneyCalculator;
 ```
 
 ## setup database
-<p> Go to the settings.py file and the search for `DATABASES` then replace its content with 
+Go to the settings.py file and the search for `DATABASES` then replace its content with 
 <br>
-`DATABASES = {
+``` 
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'your user name',
@@ -42,5 +43,14 @@ create database MoneyCalculator;
         'HOST': 'localhost',
         'PORT': '3306',
     }
-}`</p>
+}
+```
 
+### install cors header 
+```bash
+pip install django-cors-headers
+```
+### install simple JWT(JSON Web Token)
+```bash
+pip install djangorestframework-simplejwt
+```

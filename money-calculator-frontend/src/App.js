@@ -7,6 +7,7 @@ import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard"
 
 import { useSelector } from "react-redux";
+import AddTitle from "./components/pages/AddTitle";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
       </Route>
       <Route path="/dashboard" element={access_token?<Dashboard/>:<Navigate to="/signin"/>}/>
+      <Route path ="dashboard/add-title" element={<AddTitle/>}/>
     </Routes>
     </BrowserRouter>
     </>

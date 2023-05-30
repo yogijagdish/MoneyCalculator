@@ -1,10 +1,29 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { add_data } from "../images/image";
+
+import { useGetTitleApiQuery } from "../services/authAPI";
+
+import { getToken } from "../services/userTokenService";
+import ImageDisplay from "./ImageDisplay";
 
 export default function Cards() {
 
     const [addTitle,setAddTitle] = useState(false);
+
+    const [userData,setUserData] = useState([0]);
+
+    const { access_token } = getToken();
+
+    const {data,isSuccess} = useGetTitleApiQuery(access_token);
+
+    useEffect(()=>{
+      if (data && isSuccess) {
+        setUserData(data.data)
+        console.log(data.data)
+      }
+    })
 
     const handleClick = () => {
         setAddTitle(true)
@@ -13,16 +32,30 @@ export default function Cards() {
         setAddTitle(false)
     }
 
+    const baseUrl = 'http://127.0.0.1:8000'
+  
+
+
      return(
         <div className="flex flex-row flex-wrap gap-16 ml-8">
 
+<div className="flex flex-row flex-wrap gap-16 ml-8">
+
+        {userData.map((item) => (
+          
+          <div key={item.id} className="border-2 h-64 w-64 rounded-lg">
+        <ImageDisplay imageurl={baseUrl+item.image} />
+        <p className="text-2xl ml-28 mt-2"> {item.title} </p>
+        <p className="text-sm ml-2 mt-2"> {item.description}</p>
+        </div>
+
+))}
+</div>
         <div className="border-dashed border-2 h-64 w-64 rounded-lg" onClick={handleClick}>
         <img src={add_data} alt="plus pic" className="h-32 w-32 ml-16 mt-16"/>
         <p className="ml-20 mt-2"> Add Title </p>
         </div>
-        <div className="border-2 h-64 w-64 rounded-lg">
-        this is card2
-        </div>
+
         {addTitle && (
             <div className="fixed inset-0 flex items-center justify-center">
             <div className="bg-black opacity-50 fixed inset-0"></div>

@@ -6,7 +6,7 @@ from authentication.models import User
 
 class UserAdmin(BaseUserAdmin):
 
-    list_display = ["email","name","date_of_birth","is_admin"]
+    list_display = ["id","email","name","date_of_birth","is_admin"]
 
     list_filter = ["is_admin"]
 
